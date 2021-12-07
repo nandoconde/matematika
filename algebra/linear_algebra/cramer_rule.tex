@@ -1,0 +1,115 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+%\usepackage[margin=1in]{geometry}
+%\linespread{1.3}
+
+
+\begin{document}
+
+\title{Regla de Cramer}
+\author{}
+\date{}
+\maketitle
+%\tableofcontents
+%\pagebreak
+%\vspace*{-2cm}
+\section{Problema}
+
+Dado un sistema de ecuaciones lineales con \(n\) ecuaciones y \(n\) incógnitas:
+\begin{align*}
+    a_{11}\cdot x_{1} + a_{12}\cdot x_{2} + \dotsb + a_{1n}\cdot x_{n} &= b_{1}\\
+    a_{21}\cdot x_{1} + a_{22}\cdot x_{2} + \dotsb + a_{2n}\cdot x_{n} &= b_{2}\\
+    &\;\;\vdots \\
+    a_{n1}\cdot x_{1} + a_{n2}\cdot x_{2} + \dotsb + a_{nn}\cdot x_{n} &= b_{n}
+\end{align*}
+y la ecuación matricial asociada al sistema:
+\begin{gather*}
+    \bf A\cdot x = b\\
+    \mathbf{A} = \begin{bmatrix}
+        a_{11} & a_{12} & \dotso & a_{1n} \\
+        a_{21} & b_{22} & \dotso & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \dotso & a_{nn} 
+        \end{bmatrix} \qquad
+    \mathbf{x} = \begin{bmatrix}
+        x_1\\ x_2\\ \vdots \\ x_n
+        \end{bmatrix} \qquad
+    \mathbf{b} = \begin{bmatrix}
+        b_1\\
+        b_2\\
+        \vdots \\
+        b_n
+        \end{bmatrix}
+\end{gather*}
+hallar el valor de la incógnita \(x_i\) (para cualquier \(i = 1,\dotsc,n\)).
+
+\vspace{2cm}
+
+\section{Solución}
+Según la regla de Cramer, la incógnita \(x_i\) se halla directamente mediante:
+
+\begin{equation*}
+    x_i = \frac{\left| \mathbf{A_{(i)}} \right|}{\left| \mathbf{A} \right|} = \frac{\det{\mathbf{A_{(i)}}}}{\det{\mathbf{A}}}
+\end{equation*}
+
+Donde:
+
+\begin{itemize}
+    \item \(\det{\mathbf{A}}\) es el determinante de \(\mathbf{A}\)
+    \item \(\det{\mathbf{A_{(i)}}}\) es el determinante de \(\mathbf{A}\), pero 
+    sustituyendo la columna \(i\) por la matriz columna de términos 
+    independientes, \(\mathbf{b}\):
+\end{itemize}
+
+\begin{equation*}
+    \mathbf{A_{(i)}} = \begin{bmatrix}
+        a_{11} & \dotso & a_{1(i-1)} & \textcolor{red}{b_{1}} & a_{1(1+i)} & \dotso & a_{1n} \\
+        a_{21} & \dotso & a_{2(i-1)} & \textcolor{red}{b_{2}} & a_{2(1+i)} & \dotso & a_{2n} \\
+        \vdots & \ddots & \vdots & \textcolor{red}{\vdots} & \vdots & \ddots & \vdots \\
+        a_{n1} & \dotso & a_{n(i-1)} & \textcolor{red}{b_{n}} & a_{n(1+i)} & \dotso & a_{nn}
+        \end{bmatrix}
+\end{equation*}
+
+\vspace*{2cm}
+\section{Ejemplo}
+Para el sistema:
+\begin{gather*}
+    \bf A\cdot x = b\\
+    \\
+    \mathbf{A} = \begin{bmatrix}
+        1 & \hphantom{{-}}1 & \hphantom{{-}}1 \\
+        1 & {-}1 & \hphantom{{-}}2 \\
+        1 & {-}1 & {-}3 
+        \end{bmatrix} \qquad
+    \mathbf{x} = \begin{bmatrix}
+        x_1\\ x_2\\ x_3
+        \end{bmatrix} \qquad
+    \mathbf{b} = \begin{bmatrix}
+        6\\
+        5\\
+        {-}10
+        \end{bmatrix}
+\end{gather*}
+halle el valor de \(x_2\).
+\vspace*{1cm}
+\begin{tcolorbox}
+    \begin{equation*}
+        x_2 = \frac{\det{\mathbf{A_{(2)}}}}%
+        {\det{\mathbf{A}}} =%
+        \frac{\begin{bmatrix}
+            1 & \textcolor{red}{\hphantom{{-}}6} & \hphantom{{-}}1 \\
+            1 & \textcolor{red}{\hphantom{{-}}5} & \hphantom{{-}}2 \\
+            1 & \textcolor{red}{{-}10} & {-}3 
+            \end{bmatrix}}{\begin{bmatrix}
+                1 & \hphantom{{-}}1 & \hphantom{{-}}1 \\
+                1 & {-}1 & \hphantom{{-}}2 \\
+                1 & {-}1 & {-}3 
+                \end{bmatrix}} = \frac{20}{10}=%
+            2
+    \end{equation*}
+\end{tcolorbox}
+
+
+\end{document}
